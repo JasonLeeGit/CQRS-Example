@@ -1,0 +1,23 @@
+server:
+ port: 9191
+spring:
+ application:
+  name: artist-command-service
+ datasource:
+  driver-class-name: com.mysql.cj.jdbc.Driver
+  url: jdbc:mysql://192.168.0.21:3307/cqrs
+  # jdbc:mysql://localhost:3306/cqrs run against local MySQL not docker  
+  username: root
+  password: password
+ jpa:
+  show-sql: true
+  hibernate:
+   ddl-auto: update		
+  properties:
+   hibernate: 
+    dialect: org.hibernate.dialect.MySQLDialect
+ kafka:
+  producer:
+    bootstrap-servers: 192.168.0.21:29092 
+    key-serializer: org.apache.kafka.common.serialization.StringSerializer
+    value-serializer:  org.springframework.kafka.support.serializer.JsonSerializer
