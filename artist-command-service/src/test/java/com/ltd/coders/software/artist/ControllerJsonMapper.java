@@ -22,7 +22,6 @@ import com.ltd.coders.software.artist.service.ArtistCommandService;
 
 @TestMethodOrder(OrderAnnotation.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK, classes = ArtistCommandServiceApplication.class)
-//@ActiveProfiles({"test"})
 public abstract class ControllerJsonMapper {
     
 	@Autowired
@@ -31,8 +30,8 @@ public abstract class ControllerJsonMapper {
 	
 	@MockitoBean
 	protected ArtistCommandService mockArtistCommandService;
-	protected Artist artist;
 	protected ArtistEvent artistEvent;
+	protected Artist artist;
 
 	@BeforeEach
 	public void setUp() throws Exception {
@@ -54,5 +53,13 @@ public abstract class ControllerJsonMapper {
 			throws JsonParseException, JsonMappingException, IOException {
 		ObjectMapper objectMapper = new ObjectMapper();
 		return objectMapper.readValue(json, clazz);
+	}
+	
+	protected static String asJsonString(final Object obj) {
+		try {
+			return new ObjectMapper().writeValueAsString(obj);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
 	}
 }

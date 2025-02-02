@@ -7,7 +7,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import java.io.IOException;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -21,10 +20,6 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.testcontainers.containers.MySQLContainer;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ltd.coders.software.artist.ControllerJsonMapper;
 import com.ltd.coders.software.artist.entity.Artist;
 
@@ -114,27 +109,9 @@ public class ArtistCommandControlleRestTest extends ControllerJsonMapper {
 				.andExpect(status().is4xxClientError()).andReturn();
 
 		verify(mockArtistCommandService, times(0)).updateArtist(0, artistEvent);
-
+	
 		List<Object> header = mvcResult.getResponse().getHeaderValues("Error message");
 		assertEquals(header.get(0), "Error artist failed validation");
 	}
 
-	protected String mapToJson(Object obj) throws JsonProcessingException {
-		ObjectMapper objectMapper = new ObjectMapper();
-		return objectMapper.writeValueAsString(obj);
-	}
-
-	protected <T> T mapFromJson(String json, Class<T> clazz)
-			throws JsonParseException, JsonMappingException, IOException {
-		ObjectMapper objectMapper = new ObjectMapper();
-		return objectMapper.readValue(json, clazz);
-	}
-
-	private static String asJsonString(final Object obj) {
-		try {
-			return new ObjectMapper().writeValueAsString(obj);
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
 }
