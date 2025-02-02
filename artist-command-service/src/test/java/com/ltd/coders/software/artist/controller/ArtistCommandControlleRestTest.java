@@ -111,7 +111,7 @@ public class ArtistCommandControlleRestTest extends ControllerJsonMapper {
 		verify(mockArtistCommandService, times(0)).updateArtist(0, artistEvent);
 	
 		List<Object> header = mvcResult.getResponse().getHeaderValues("Error message");
-		assertEquals(header.get(0), "Error artist failed validation");
+		assertEquals(header.get(0), "Error artist failed validation invalid id");
 	}
 
 }

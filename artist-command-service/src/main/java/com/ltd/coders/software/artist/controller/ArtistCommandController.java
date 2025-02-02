@@ -54,7 +54,7 @@ public class ArtistCommandController {
 			}
 		} else {
 			MultiValueMap<String, String> headers = new HttpHeaders();
-			headers.add("Error message", "Error artist failed validation");
+			headers.add("Error message", "Error artist failed validation invalid id");
 			response = new ResponseEntity<Artist>(headers, HttpStatus.BAD_REQUEST);
 		}
 		return response;
