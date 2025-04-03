@@ -61,14 +61,11 @@ public class ArtistCommandController {
 	}
 
 	private boolean isArtistValid(Artist artist) {
-		if (artist.getArtistName() != null && !artist.getArtistName().isEmpty() 
+		return artist.getArtistName() != null && !artist.getArtistName().isEmpty() 
 				&& artist.getAlbumName() != null && !artist.getAlbumName().isEmpty() 
 				&& artist.getAlbumReleaseYear() != null && !artist.getAlbumReleaseYear().isEmpty() 
-				&& artist.getPrice() > 0.0) {
-			return true;
-		} else {
-			return false;
-		}
+				&& artist.getPrice() > 0.0;
+			
 
 	}
 }
