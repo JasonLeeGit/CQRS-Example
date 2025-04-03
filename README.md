@@ -1,6 +1,9 @@
 # CQRS-Example
 Command Query Responsibility Segregation Example with Kafka event sourcing
 
+CQRS allows you to separate the load from reads and writes allowing you to scale each independently. 
+If your application sees a big disparity between reads and writes this is very useful.
+
 To Run
 
 Open a command prompt/terminal and cd to artist-command-service\src\main\resources and run docker-compose up -d
